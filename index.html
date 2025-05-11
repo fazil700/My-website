@@ -31,7 +31,7 @@
         }
         /* Canvas container for three.js animation */
         #hero-canvas-container {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -123,6 +123,7 @@
     </style>
 </head>
 <body class="antialiased">
+<div id="hero-canvas-container"></div>
 
     <header class="fixed top-0 left-0 right-0 z-20 bg-opacity-80 backdrop-blur-md border-b border-gray-700/50 shadow-lg">
         <div class="container mx-auto px-6 py-4">
@@ -140,14 +141,14 @@
     </header>
 
     <section id="hero" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-        <div id="hero-canvas-container"></div>
+        
 
         <div class="content-layer p-6 max-w-3xl mx-auto">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-white" style="text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 0 30px rgba(59,130,246,0.5);">
                 Hi, I'm <span class="text-blue-400">Mohammed Fazil Adam Basha</span>
             </h1>
             <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10">
-                An <span class="font-semibold text-blue-300">Embedded Security Engineer & Developer</span> passionate about cybercrime investigation and creating secure, innovative solutions.
+                An <span class="font-semibold text-blue-300">Embedded Security Engineer & Developer</span> Passionate about secure digital systems, I work at the intersection of cybersecurity and embedded development—from malware analysis to smart EV firmware.<p>"The Rare Combo: Where Embedded Tech Meets Cybersecurity"</p>
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#projects" class="custom-btn text-lg w-full sm:w-auto">
@@ -282,6 +283,35 @@
                 </div>
             </div>
         </section>
+<section id="experience" class="py-20 md:py-32 bg-gray-900/30">
+    <div class="container mx-auto px-6">
+        <div class="glass-section p-8 md:p-12 max-w-4xl mx-auto">
+            <h2 class="section-title">Work Experience</h2>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-blue-300">Embedded Security Engineer</h3>
+                <p class="text-gray-400 text-sm mb-2">TestBase Solutions, India — <em>Mar 2023 – Feb 2024</em></p>
+                <ul class="list-disc list-inside text-gray-300 space-y-1">
+                    <li>Developed firmware for a wireless EV charging prototype using ARM microcontrollers.</li>
+                    <li>Integrated CAN and UDS protocols to enhance automotive diagnostic reliability.</li>
+                    <li>Utilized LabVIEW and NI TestStand, aligning with AUTOSAR and embedded security standards.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-blue-300">Network Security Analyst Intern</h3>
+                <p class="text-gray-400 text-sm mb-2">CBTS, India — <em>Nov 2022 – Feb 2023</em></p>
+                <ul class="list-disc list-inside text-gray-300 space-y-1">
+                    <li>Managed firewalls, IDS/IPS, and VPNs to ensure secure operations.</li>
+                    <li>Monitored network traffic with Splunk and mitigated potential threats.</li>
+                    <li>Ensured ISO 27001 and GDPR compliance through detailed audits.</li>
+                    <li>Collaborated on cloud security in CI/CD pipelines, improving system integrity.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <section id="certificates" class="py-20 md:py-32 bg-gray-900/30">
             <div class="container mx-auto px-6">
@@ -418,7 +448,7 @@
             heroCanvasContainer.appendChild(renderer.domElement);
 
             // Particles
-            const particleCount = 5000; // Number of particles
+            const particleCount = 10000; // Number of particles
             const positions = new Float32Array(particleCount * 3); // Each particle has x, y, z
             const colors = new Float32Array(particleCount * 3); // Each particle has r, g, b
 
@@ -513,7 +543,7 @@
             if (heroCanvasContainer) {
                 try {
                     initThreeJS();
-                    animateParticles();
+                    animateParticles()
                 } catch (error) {
                     console.error("Error initializing Three.js animation:", error);
                     // Optionally, hide the canvas or show a fallback if animation fails
@@ -524,5 +554,7 @@
             }
         };
     </script>
+
 </body>
+
 </html>
