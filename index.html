@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Fazil Adam Basha - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom scrollbar for a more modern look (optional) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a202c; /* Dark background for track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Gray thumb */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #718096; /* Lighter gray on hover */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark blue-gray background */
+            color: #e5e7eb; /* Light gray text */
+        }
+        /* Canvas container for three.js animation */
+        #hero-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind content */
+            overflow: hidden; /* Ensure canvas doesn't cause scrollbars */
+        }
+        canvas {
+            display: block; /* Remove extra space below canvas */
+        }
+        /* Ensure content is above the canvas */
+        .content-layer {
+            position: relative;
+            z-index: 1;
+        }
+        /* Glassmorphism effect for sections */
+        .glass-section {
+            background: rgba(23, 37, 60, 0.6); /* Semi-transparent dark blue */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem; /* 16px */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        /* Custom button style */
+        .custom-btn {
+            background-color: #3b82f6; /* Blue-500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+            display: inline-flex; /* For icon alignment */
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-btn:hover {
+            background-color: #2563eb; /* Blue-600 */
+            transform: translateY(-2px);
+        }
+        .custom-btn:active {
+            transform: translateY(0px);
+        }
+        /* Project card hover effect */
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Section title styling */
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 2rem; /* mb-8 */
+            text-align: center;
+            color: #93c5fd; /* Light blue for titles */
+            text-shadow: 0 0 10px rgba(147, 197, 253, 0.3);
+        }
+        /* Skill item styling */
+        .skill-item {
+            background-color: rgba(55, 65, 81, 0.7); /* gray-700 with opacity */
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .skill-item:hover {
+            background-color: #3b82f6; /* Blue-500 */
+            transform: scale(1.05);
+        }
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+        .certificate-img {
+            border-radius: 0.5rem;
+            border: 2px solid rgba(59, 130, 246, 0.5); /* Blue border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .certificate-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-20 bg-opacity-80 backdrop-blur-md border-b border-gray-700/50 shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex items-center justify-between">
+                <a href="#" class="text-xl md:text-2xl font-bold text-white hover:text-blue-400 transition-colors">Mohammed Fazil Adam Basha</a>
+                <div class="space-x-3 sm:space-x-4 md:space-x-6">
+                    <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">About</a>
+                    <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Projects</a>
+                    <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Skills</a>
+                    <a href="#certificates" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Certificates</a>
+                    <a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+        <div id="hero-canvas-container"></div>
+
+        <div class="content-layer p-6 max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-white" style="text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 0 30px rgba(59,130,246,0.5);">
+                Hi, I'm <span class="text-blue-400">Mohammed Fazil Adam Basha</span>
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10">
+                An <span class="font-semibold text-blue-300">Embedded Security Engineer & Developer</span> passionate about cybercrime investigation and creating secure, innovative solutions.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#projects" class="custom-btn text-lg w-full sm:w-auto">
+                    View My Work
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="The_Resume_M.pdf" download="Mohammed_Fazil_Adam_Basha_Resume.pdf" class="custom-btn text-lg bg-green-500 hover:bg-green-600 w-full sm:w-auto">
+                    <i class="fas fa-download mr-2"></i> Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="content-layer"> <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="glass-section p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="text-center md:text-left md:flex md:items-start md:space-x-10">
+                        <img src="1000071759 (1).jpg" alt="Mohammed Fazil Adam Basha" class="w-40 h-40 md:w-48 md:h-48 rounded-full mx-auto md:mx-0 mb-6 md:mb-0 border-4 border-blue-400 object-cover shadow-lg flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/200x200/3B82F6/FFFFFF?text=MFAB';">
+                        <div class="flex-grow">
+                            <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                                Hello! I'm Mohammed Fazil Adam Basha. I am currently pursuing a Master of Engineering in Information Systems Security at Concordia University, Montreal (expected 2026), building upon my Bachelor's in Electronics Communication Engineering from Anna University (2022).
+                            </p>
+                            <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                                My professional experience includes working as an Embedded Security Engineer at TestBase Solutions, where I developed firmware for wireless EV charging prototypes and integrated CAN/UDS communication protocols. I also gained valuable experience as a Network Security Analyst Intern at CBTS, managing network security infrastructure and ensuring compliance with standards like ISO 27001 and GDPR.
+                            </p>
+                             <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                                I am proficient in various programming languages including Embedded C, C#, Python, and web technologies. My technical toolkit also includes platforms like VMware, Kali Linux, and tools such as Splunk and Wireshark. I hold certifications in Cisco Cyber Threat Management and an IBM Embedded Certificate.
+                            </p>
+                            <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                                My passions lie in programming, securing networks, embedded development, and app development. In my free time, I enjoy reading novels and comics, and engaging in sports like athletics, cricket, and e-sports.
+                            </p>
+                            <div class="mt-6">
+                                <h3 class="text-xl font-semibold text-blue-300 mb-2">Awards & Distinctions</h3>
+                                <ul class="list-disc list-inside text-gray-400">
+                                    <li>Stress Interview Winner - University level (Aug 2022)</li>
+                                    <li>Walk for plastic Green Man award - NGO Walk for plastic (Apr 2021)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 md:py-32 bg-gray-900/30">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="project-card glass-section p-6 flex flex-col">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=MARFCAT+Project" alt="MARFCAT Project" class="rounded-lg mb-4 h-48 w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a202c/4a5568?text=Project+Image+Error';">
+                        <h3 class="text-2xl font-semibold mb-2 text-blue-300">MARFCAT: Fast Code Analysis</h3>
+                        <p class="text-gray-400 mb-2 text-sm">Concordia University (2024 - Present)</p>
+                        <p class="text-gray-400 mb-4 flex-grow">Led a 5-person team in a cybercrime investigation project focusing on malware detection and forensic analysis. Enhanced cybersecurity measures by identifying malicious file patterns and strengthening protocols. This project achieved top recognition for its contributions to cyber threat intelligence.</p>
+                        <p class="text-gray-500 mb-3 text-sm"><strong>Core Competencies:</strong> Forensic analysis, malware detection, cybersecurity protocols.</p>
+                        </div>
+                    <div class="project-card glass-section p-6 flex flex-col">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=EV+Dashboard+GUI" alt="EV Car Dashboard GUI" class="rounded-lg mb-4 h-48 w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a202c/4a5568?text=Project+Image+Error';">
+                        <h3 class="text-2xl font-semibold mb-2 text-blue-300">EV Car Dashboard GUI</h3>
+                         <p class="text-gray-400 mb-2 text-sm">TestBase Solutions (Mar 2023)</p>
+                        <p class="text-gray-400 mb-4 flex-grow">Designed a smart EV dashboard using Python and PyQt, featuring real-time CAN/UART sensor integration and secure edge data handling. Implemented Wi-Fi/MQTT connectivity for diagnostics, OTA updates, and cloud synchronization, ensuring robust network security. Enabled trigger-based actions from sensor data and user input.</p>
+                         <p class="text-gray-500 mb-3 text-sm"><strong>Technologies:</strong> Python, PyQt, CAN/UART, MQTT, Edge Computing.</p>
+                         <div class="mt-auto pt-3">
+                            <a href="https://github.com/fazil700/EV-Dashboard-GUI" target="_blank" rel="noopener noreferrer" class="custom-btn text-sm w-full text-center block">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                 <div class="glass-section p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-blue-300 mb-3 text-center">Security:</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="skill-item">Cyber Threat Management</span>
+                            <span class="skill-item">Penetration Testing</span>
+                            <span class="skill-item">Vulnerability Scanning</span>
+                            <span class="skill-item">OS Security</span>
+                            <span class="skill-item">Cryptography</span>
+                            <span class="skill-item">Network Security</span>
+                            <span class="skill-item">Firewalls/IDS/IPS</span>
+                            <span class="skill-item">ISO 27001</span>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-blue-300 mb-3 text-center">Programming & Development:</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="skill-item">Embedded C</span>
+                            <span class="skill-item">C#</span>
+                            <span class="skill-item">Python</span>
+                            <span class="skill-item">HTML</span>
+                            <span class="skill-item">CSS</span>
+                            <span class="skill-item">LabVIEW</span>
+                            <span class="skill-item">TestStand</span>
+                            <span class="skill-item">PyQt</span>
+                            <span class="skill-item">Android Studio</span>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-blue-300 mb-3 text-center">Embedded Systems & OS:</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="skill-item">ARM Microcontrollers</span>
+                            <span class="skill-item">CAN & UDS Protocols</span>
+                            <span class="skill-item">AUTOSAR</span>
+                            <span class="skill-item">Kali OS</span>
+                            <span class="skill-item">Windows</span>
+                            <span class="skill-item">Linux</span>
+                            <span class="skill-item">Unix</span>
+                             <span class="skill-item">Mac OS</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-300 mb-3 text-center">Tools, Platforms & Languages:</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="skill-item">VMware</span>
+                            <span class="skill-item">PyCharm</span>
+                            <span class="skill-item">Git & GitHub</span>
+                            <span class="skill-item">Splunk</span>
+                            <span class="skill-item">Blender 3D</span>
+                            <span class="skill-item">Photoshop</span>
+                            <span class="skill-item">English (Fluent)</span>
+                            <span class="skill-item">French (Intermediate)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="py-20 md:py-32 bg-gray-900/30">
+            <div class="container mx-auto px-6">
+                <div class="glass-section p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2 class="section-title">Certifications & Badges</h2>
+                    <p class="text-center text-gray-300 mb-8 text-lg">
+                        My key certifications and digital badges.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start mb-10">
+                        <div class="text-center">
+                             <a href="https://www.credly.com/badges/7b14d578-373a-4ebd-b8aa-3a6678e9176b/linked_in_profile" target="_blank" rel="noopener noreferrer" class="inline-block">
+                                <img src="https://images.credly.com/size/340x340/images/0c2c5d45-434e-43b1-a6df-90d5e386e3ff/image.png" alt="Cisco Cyber Threat Management Badge" class="w-40 h-40 mx-auto certificate-img" onerror="this.onerror=null;this.src='https://placehold.co/160x160/1F2937/93C5FD?text=Badge+1';">
+                            </a>
+                            <p class="mt-3 text-blue-300 font-semibold">Cisco Cyber Threat Management</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="https://www.credly.com/badges/98f3d8db-8e99-4237-a9eb-8215a8e5d0f1/linked_in_profile" target="_blank" rel="noopener noreferrer" class="inline-block">
+                                <img src="https://images.credly.com/size/340x340/images/0d0591d1-dc6e-41b0-9a3e-d19766282c51/image.png" alt="IBM Introduction to Cybersecurity Badge" class="w-40 h-40 mx-auto certificate-img" onerror="this.onerror=null;this.src='https://placehold.co/160x160/1F2937/93C5FD?text=Badge+2';">
+                            </a>
+                             <p class="mt-3 text-blue-300 font-semibold">IBM Intro to Cybersecurity Tools & Cyber Attacks</p>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-300 mb-6 text-lg">
+                        Downloadable PDF certificates:
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="CyberThreatManagementUpdate20250510-28-1ssbsz.pdf" download="Cyber_Threat_Management_Certificate.pdf" class="custom-btn text-sm w-full sm:w-auto">
+                           <i class="fas fa-file-arrow-down mr-2"></i> Cyber Threat Mgmt Cert.
+                        </a>
+                        <a href="I2CSUpdate20250510-27-p998tf.pdf" download="Intro_Cybersecurity_Certificate.pdf" class="custom-btn text-sm w-full sm:w-auto">
+                            <i class="fas fa-file-arrow-down mr-2"></i> Intro to Cybersecurity Cert.
+                        </a>
+                    </div>
+                     <p class="text-center text-gray-400 mt-8 text-sm">
+                        Additional certifications include an IBM Embedded Systems Certificate.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="glass-section p-8 md:p-12 max-w-2xl mx-auto">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="text-center text-gray-300 mb-8 text-lg">
+                        I'm always open to discussing new projects, collaborations, or opportunities. Feel free to reach out!
+                    </p>
+                    <form action="mailto:mohammedfazil700@gmail.com" method="post" enctype="text/plain" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                            <input type="text" name="name" id="name" required class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none placeholder-gray-400 text-white">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                            <input type="email" name="email" id="email" required class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none placeholder-gray-400 text-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                            <textarea name="message" id="message" rows="5" required class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none placeholder-gray-400 text-white"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="custom-btn text-lg px-8 py-3">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-10 text-center">
+                        <p class="text-gray-300 mb-3">Connect with me:</p>
+                        <div class="flex justify-center space-x-6">
+                            <a href="https://www.linkedin.com/in/faz20" target="_blank" rel="noopener noreferrer" class="inline-block social-icon" title="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-400 hover:text-blue-300" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="https://mohfaz.netlify.app/" target="_blank" rel="noopener noreferrer" class="inline-block social-icon" title="My Portfolio Website">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-400 hover:text-green-300" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.93c-3.9-.49-7-3.85-7-7.93 0-1.06.21-2.07.59-3H11v10.93zM13 16.93V6H7.59c.38-.93.59-1.94.59-3h7.64c.38.93.59 1.94.59 3H13v10.93zM12 4c1.06 0 2.07.21 3 .59V11h-6V4.59c.93-.38 1.94-.59 3-.59z" opacity=".3"/> <path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.93V11H4.59A7.947 7.947 0 014 12c0 4.08 3.05 7.44 6.95 7.93zm2 .02C17 19.47 20 16.13 20 12c0-.69-.1-1.36-.28-2H13v6.95zm6.72-8.95H13V6h6.41c.18.64.28 1.31.28 2 0 1.8-.57 3.45-1.59 4.82zM11 4.07V9h-6.59A7.947 7.947 0 014 12c0-4.08 3.05-7.44 6.95-7.93zM11 4.07C8.05 4.56 5 7.92 5 12c0 .69.1 1.36.28 2H11V4.07zm2-.02C14.95 4.56 18 7.92 18 12c0-.69-.1-1.36-.28-2H13V4.05z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="py-10 bg-gray-950 text-center content-layer">
+        <div class="container mx-auto px-6">
+            <p class="text-gray-400">
+                &copy; <span id="currentYear"></span> Mohammed Fazil Adam Basha. All rights reserved.
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                Designed with <span class="text-red-500">&hearts;</span> and a sprinkle of Three.js
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Three.js Particle Animation
+        let scene, camera, renderer, particles, particleMaterial;
+        const heroCanvasContainer = document.getElementById('hero-canvas-container');
+
+        function initThreeJS() {
+            // Scene
+            scene = new THREE.Scene();
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, heroCanvasContainer.offsetWidth / heroCanvasContainer.offsetHeight, 0.1, 1000);
+            camera.position.z = 50; 
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ alpha: true }); 
+            renderer.setSize(heroCanvasContainer.offsetWidth, heroCanvasContainer.offsetHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
+            heroCanvasContainer.appendChild(renderer.domElement);
+
+            // Particles
+            const particleCount = 5000; // Number of particles
+            const positions = new Float32Array(particleCount * 3); // Each particle has x, y, z
+            const colors = new Float32Array(particleCount * 3); // Each particle has r, g, b
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                // Position: spread out in a larger cube for a more dispersed effect
+                positions[i] = (Math.random() - 0.5) * 200; // x
+                positions[i + 1] = (Math.random() - 0.5) * 200; // y
+                positions[i + 2] = (Math.random() - 0.5) * 100; // z (less depth to keep them somewhat planar)
+
+                // Color: shades of blue and white/gray
+                const baseColor = Math.random() > 0.5 ? new THREE.Color(0x3b82f6) : new THREE.Color(0x93c5fd); // Blue shades
+                if (Math.random() < 0.2) { // Some white/gray particles
+                    const grayShade = Math.random() * 0.5 + 0.5; // 0.5 to 1.0
+                    baseColor.setRGB(grayShade, grayShade, grayShade);
+                }
+                colors[i] = baseColor.r;
+                colors[i+1] = baseColor.g;
+                colors[i+2] = baseColor.b;
+            }
+
+            const particleGeometry = new THREE.BufferGeometry();
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+
+            particleMaterial = new THREE.PointsMaterial({
+                size: 0.25, // Slightly larger particles
+                vertexColors: true, // Use colors defined in geometry
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending, // For a brighter, glowing effect
+                depthWrite: false // Important for blending
+            });
+
+            particles = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particles);
+
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            if (camera && renderer && heroCanvasContainer) {
+                camera.aspect = heroCanvasContainer.offsetWidth / heroCanvasContainer.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(heroCanvasContainer.offsetWidth, heroCanvasContainer.offsetHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            }
+        }
+
+        // Mouse interaction for particle movement
+        let mouseX = 0, mouseY = 0;
+        // Calculate window half sizes once
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX) / 5; // Divide to reduce sensitivity
+            mouseY = (event.clientY - windowHalfY) / 5;
+        }
+        // Add mousemove event listener
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+
+        function animateParticles() {
+            // Request the next frame
+            requestAnimationFrame(animateParticles);
+
+            const time = Date.now() * 0.0001; // Slower animation
+
+            // Animate particles
+            if (particles) {
+                particles.rotation.y = time * 0.2; // Slow rotation
+                particles.rotation.x = time * 0.1;
+
+                // Subtle movement based on mouse position for the camera
+                // Lerp camera position for smoother movement
+                camera.position.x += (mouseX - camera.position.x) * 0.01;
+                camera.position.y += (-mouseY - camera.position.y) * 0.01; // Invert mouseY for natural movement
+                camera.lookAt(scene.position); // Ensure camera always looks at the center of the scene
+            }
+
+
+            // Render the scene
+            if (renderer && scene && camera) {
+                 renderer.render(scene, camera);
+            }
+        }
+        
+        // Start animation only after the DOM is fully loaded and heroCanvasContainer exists
+        window.onload = function() {
+            if (heroCanvasContainer) {
+                try {
+                    initThreeJS();
+                    animateParticles();
+                } catch (error) {
+                    console.error("Error initializing Three.js animation:", error);
+                    // Optionally, hide the canvas or show a fallback if animation fails
+                    // heroCanvasContainer.style.display = 'none'; 
+                }
+            } else {
+                console.error("Hero canvas container not found. Three.js animation will not start.");
+            }
+        };
+    </script>
+</body>
+</html>
