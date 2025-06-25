@@ -31,7 +31,7 @@
         }
         /* Canvas container for three.js animation */
         #hero-canvas-container {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -123,7 +123,6 @@
     </style>
 </head>
 <body class="antialiased">
-<div id="hero-canvas-container"></div>
 
     <header class="fixed top-0 left-0 right-0 z-20 bg-opacity-80 backdrop-blur-md border-b border-gray-700/50 shadow-lg">
         <div class="container mx-auto px-6 py-4">
@@ -131,7 +130,9 @@
                 <a href="#" class="text-xl md:text-2xl font-bold text-white hover:text-blue-400 transition-colors">Mohammed Fazil Adam Basha</a>
                 <div class="space-x-3 sm:space-x-4 md:space-x-6">
                     <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">About</a>
+                    <a href="#experience" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Experience</a>
                     <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Projects</a>
+                    <a href="#publications" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Publications</a>
                     <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Skills</a>
                     <a href="#certificates" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Certificates</a>
                     <a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors text-xs sm:text-sm md:text-base">Contact</a>
@@ -141,14 +142,14 @@
     </header>
 
     <section id="hero" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-        
+        <div id="hero-canvas-container"></div>
 
         <div class="content-layer p-6 max-w-3xl mx-auto">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-white" style="text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 0 30px rgba(59,130,246,0.5);">
                 Hi, I'm <span class="text-blue-400">Mohammed Fazil Adam Basha</span>
             </h1>
             <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10">
-                An <span class="font-semibold text-blue-300">Embedded Security Engineer & Developer</span> Passionate about secure digital systems, I work at the intersection of cybersecurity and embedded development—from malware analysis to smart EV firmware.<p>"The Rare Combo: Where Embedded Tech Meets Cybersecurity"</p>
+                An <span class="font-semibold text-blue-300">Embedded Security Engineer & Developer</span> passionate about cybercrime investigation and creating secure, innovative solutions.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#projects" class="custom-btn text-lg w-full sm:w-auto">
@@ -196,7 +197,42 @@
             </div>
         </section>
 
-        <section id="projects" class="py-20 md:py-32 bg-gray-900/30">
+        <section id="experience" class="py-20 md:py-32 bg-gray-900/30">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Professional Experience</h2>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="glass-section p-6">
+                        <h3 class="text-2xl font-semibold text-blue-300">Embedded Systems & Security Engineering Intern</h3>
+                        <p class="text-gray-400 mb-2">Brighter Signals B.V., Montreal, QC | May 2025 – Aug 2025 (Expected)</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li>Developed low-level firmware in C/C++ for ARM Cortex-M microcontrollers and integrated real-time sensor data with Qt/Android GUIs.</li>
+                            <li>Designed edge-computing logic and implemented communication protocols (SPI, I2C, UART, BLE) for efficient embedded performance.</li>
+                            <li>Performed hardware debugging using oscilloscopes, logic analyzers, and embedded test frameworks to ensure system stability.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-section p-6">
+                        <h3 class="text-2xl font-semibold text-blue-300">Software Engineer</h3>
+                        <p class="text-gray-400 mb-2">TestBase Solutions, India | Mar 2023 – Feb 2024</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li>Engineered advanced network solutions for wireless EV charging, improving system efficiency by 70% using ground-based transmission technology.</li>
+                            <li>Led system design and performed rigorous testing using National Instruments LabVIEW and NI TestStand, ensuring compliance with AUTOSAR standards.</li>
+                            <li>Integrated CAN and UDS communication protocols, increasing data transmission reliability by 68%.</li>
+                        </ul>
+                    </div>
+                     <div class="glass-section p-6">
+                        <h3 class="text-2xl font-semibold text-blue-300">Network Security Analyst</h3>
+                        <p class="text-gray-400 mb-2">CBTS, India | Mar 2022 – Feb 2023</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li>Configured and managed enterprise-level firewalls, IDS/IPS, and VPN systems to secure and streamline network operations.</li>
+                            <li>Monitored and analyzed network traffic using Splunk to detect and mitigate potential threats.</li>
+                            <li>Conducted comprehensive audits and maintained documentation to ensure compliance with ISO 27001 and GDPR standards.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 md:py-32">
             <div class="container mx-auto px-6">
                 <h2 class="section-title">My Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -218,6 +254,20 @@
                                 <i class="fab fa-github mr-2"></i> View on GitHub
                             </a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="py-20 md:py-32 bg-gray-900/30">
+            <div class="container mx-auto px-6">
+                <div class="glass-section p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2 class="section-title">Publications</h2>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-semibold text-blue-300">Emerging High-Depth Signal Tactile Sensing Technology for Achieving Artificial Human Touch</h3>
+                        <p class="text-gray-400 my-2">Brighter Signals B.V., Published in IEEE SENSORS 2025 Conference Proceedings, Vancouver, Canada | July 2025</p>
+                        <p class="text-gray-400 mb-4">Co-authored pioneering research introducing novel high-depth tactile sensors, significantly advancing the field of artificial tactile sensing and human-like touch perception. The innovative textile semi-conductive technology enables Active-Dynamic and Multi-Modal sensing, revolutionizing tactile sensor design.</p>
+                        <p class="text-gray-500 text-sm"><strong>Core Competencies:</strong> Emerging Technology, Tactile Sensing, Robotics, IoT, Automation, Embedded Systems, Research & Development.</p>
                     </div>
                 </div>
             </div>
@@ -283,35 +333,6 @@
                 </div>
             </div>
         </section>
-<section id="experience" class="py-20 md:py-32 bg-gray-900/30">
-    <div class="container mx-auto px-6">
-        <div class="glass-section p-8 md:p-12 max-w-4xl mx-auto">
-            <h2 class="section-title">Work Experience</h2>
-            
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-blue-300">Embedded Security Engineer</h3>
-                <p class="text-gray-400 text-sm mb-2">TestBase Solutions, India — <em>Mar 2023 – Feb 2024</em></p>
-                <ul class="list-disc list-inside text-gray-300 space-y-1">
-                    <li>Developed firmware for a wireless EV charging prototype using ARM microcontrollers.</li>
-                    <li>Integrated CAN and UDS protocols to enhance automotive diagnostic reliability.</li>
-                    <li>Utilized LabVIEW and NI TestStand, aligning with AUTOSAR and embedded security standards.</li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-xl font-semibold text-blue-300">Network Security Analyst Intern</h3>
-                <p class="text-gray-400 text-sm mb-2">CBTS, India — <em>Nov 2022 – Feb 2023</em></p>
-                <ul class="list-disc list-inside text-gray-300 space-y-1">
-                    <li>Managed firewalls, IDS/IPS, and VPNs to ensure secure operations.</li>
-                    <li>Monitored network traffic with Splunk and mitigated potential threats.</li>
-                    <li>Ensured ISO 27001 and GDPR compliance through detailed audits.</li>
-                    <li>Collaborated on cloud security in CI/CD pipelines, improving system integrity.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
 
         <section id="certificates" class="py-20 md:py-32 bg-gray-900/30">
             <div class="container mx-auto px-6">
@@ -448,7 +469,7 @@
             heroCanvasContainer.appendChild(renderer.domElement);
 
             // Particles
-            const particleCount = 10000; // Number of particles
+            const particleCount = 5000; // Number of particles
             const positions = new Float32Array(particleCount * 3); // Each particle has x, y, z
             const colors = new Float32Array(particleCount * 3); // Each particle has r, g, b
 
@@ -543,7 +564,7 @@
             if (heroCanvasContainer) {
                 try {
                     initThreeJS();
-                    animateParticles()
+                    animateParticles();
                 } catch (error) {
                     console.error("Error initializing Three.js animation:", error);
                     // Optionally, hide the canvas or show a fallback if animation fails
@@ -554,7 +575,6 @@
             }
         };
     </script>
-
 </body>
-
 </html>
+
